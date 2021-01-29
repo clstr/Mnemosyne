@@ -18,6 +18,7 @@ export default class NavMenu extends React.Component {
   }
 
   render() {
+    console.log(this.props)
     return (
       <header>
         <Navbar className="navbar-expand-sm navbar-toggleable-sm border-bottom box-shadow mb-3" light >

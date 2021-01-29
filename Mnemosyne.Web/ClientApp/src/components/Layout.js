@@ -4,7 +4,7 @@ import NavMenu from './NavMenu';
 
 export default props => (
   <Fragment>
-    <NavMenu />
+    <NavMenu accountInfo={props.accountInfo}/>
     <Container>
       {props.children}
     </Container>

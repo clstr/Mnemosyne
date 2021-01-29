@@ -1,6 +1,7 @@
-using FluentValidation.AspNetCore;
+﻿using System;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.SpaServices.ReactDevelopmentServer;
 using Microsoft.EntityFrameworkCore;
@@ -8,14 +9,11 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
-using Mnemosyne.Infrastructure.EntityFramework.Context;
+using Mnemosyne.Infrastructure.EF.Context;
+using Mnemosyne.Infrastructure.EF.Services;
+using Mnemosyne.Infrastructure.Interfaces.Context;
+using Mnemosyne.Infrastructure.Interfaces.Services;
 using Mnemosyne.Web.Extensions;
-using System;
-using Mnemosyne.Infrastructure.Interfaces.Context.Notes;
-using Mnemosyne.Domain.Entities;
-using Mnemosyne.Infrastructure.EntityFramework.Services.Notes;
-using Mnemosyne.Infrastructure.Interfaces.Services.Notes;
-using Microsoft.AspNetCore.Http;
 
 namespace Mnemosyne.Web
 {
@@ -34,7 +32,8 @@ namespace Mnemosyne.Web
         public void ConfigureServices(IServiceCollection services)
         {
             #region Authentication
-            // TODO
+            //services.AddAuthentication(AzureADB2CDefaults.AuthenticationScheme)
+            //    .AddAzureADB2C(options => Configuration.Bind("AzureAdB2C", options));
             #endregion
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Latest);
@@ -47,7 +46,7 @@ namespace Mnemosyne.Web
 
             #region Database Context
             var databaseConnection = Configuration.GetConnectionString("DatabaseConnection");
-            services.AddDbContext<NotesDbContext>(options =>
+            services.AddDbContext<ApplicationDbContext>(options =>
             {
                 options.UseSqlServer(databaseConnection,
                     sqlServerOptionsAction: sqlOptions =>
@@ -61,17 +60,21 @@ namespace Mnemosyne.Web
             #endregion
 
             #region Dependency Injection
-            // Inject data access implementations
-            services.AddScoped<INotesDataContext>(provider => provider.GetService<NotesDbContext>());
-
-            // Inject Services implementations 
+            services.AddScoped<IApplicationContext>(provider => provider.GetService<ApplicationDbContext>());
+            services.AddTransient<IApplicationContext, ApplicationDbContext>();
+            
             services.AddTransient<IRolesQueryService, RolesQueryService>();
+            services.AddTransient<ICategoriesQueryService, CategoriesQueryService>();
+            services.AddTransient<IUsersQueryService, UsersQueryService>();
+            services.AddTransient<INotesQueryService, NotesQueryService>();
+            services.AddTransient<IGamesQueryService, GamesQueryService>();
+
+            services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+            services.AddHttpContextAccessor();
             #endregion
 
-            services.AddHttpContextAccessor();
             services.AddHealthChecks();
-            services.AddSwaggerGen(c => { c.SwaggerDoc("v1", new OpenApiInfo { Title = "My API", Version = "v1" }); });
-            services.AddSwaggerGen();
+            services.AddSwaggerGen(c => { c.SwaggerDoc("v1", new OpenApiInfo { Title = "Mnemosyne Api", Version = "v1" }); });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -79,11 +82,7 @@ namespace Mnemosyne.Web
         {
             app.ConfigureCustomExceptionMiddleware();
 
-            if (env.IsDevelopment())
-            {
-                app.UseDeveloperExceptionPage();
-            }
-            else
+            if (env.IsProduction() || env.IsStaging())
             {
                 app.UseExceptionHandler("/Error");
                 app.UseHsts();
@@ -104,6 +103,7 @@ namespace Mnemosyne.Web
 
             app.UseAuthentication();
             app.UseAuthorization();
+
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllerRoute(

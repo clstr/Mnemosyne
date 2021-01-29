@@ -22,21 +22,23 @@ const store = configureStore(history, initialState);
 const rootElement = document.getElementById('root');
 
 ReactDOM.render(
-  <Provider store={store}>
-    <ConnectedRouter history={history}>
-      <Router history={history}>
-        <ReduxToastr
-          timeOut={2000}
-          newestOnTop={true}
-          position={"top-right"}
-          transitionIn="fadeIn"
-          transitionOut="fadeOut"
-          progressBar
-          closeOnToastrClick />
-        <App />
-      </Router>
-    </ConnectedRouter>
-  </Provider>,
+  <React.StrictMode>
+    <Provider store={store}>
+      <ConnectedRouter history={history}>
+        <Router history={history}>
+          <ReduxToastr
+            timeOut={2000}
+            newestOnTop={true}
+            position={"top-right"}
+            transitionIn="fadeIn"
+            transitionOut="fadeOut"
+            progressBar
+            closeOnToastrClick />
+          <App store={store}/>
+        </Router>
+      </ConnectedRouter>
+    </Provider>
+  </React.StrictMode>,
   rootElement);
 
 //registerServiceWorker();

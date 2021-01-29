@@ -7,19 +7,19 @@ using Mnemosyne.Infrastructure.Interfaces.Services;
 
 namespace Mnemosyne.Web.Controllers
 {
-    public class RolesController : ApiControllerBase
+    public class UsersController : ApiControllerBase
     {
         private readonly IApplicationContext _applicationContext;
-        private readonly IRolesQueryService _rolesQueryService;
+        private readonly IUsersQueryService _usersQueryService;
 
-        public RolesController(IApplicationContext applicationContext, IRolesQueryService rolesQueryService)
+        public UsersController(IApplicationContext applicationContext, IUsersQueryService usersQueryService)
         {
             _applicationContext = applicationContext;
-            _rolesQueryService = rolesQueryService;
+            _usersQueryService = usersQueryService;
         }
 
         [HttpGet("all")]
-        public IEnumerable<Roles> GetAllRoles() =>
-            _applicationContext.Roles.All();
+        public IEnumerable<Users> GetAllUsers() =>
+          _applicationContext.Users.All();
     }
 }

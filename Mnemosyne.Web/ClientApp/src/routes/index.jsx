@@ -7,12 +7,14 @@ import FetchData from '../components/FetchData';
 
 const PageNotFound = () => <h1>Oops! Page not found.</h1>
 
-const Routes = () => {
+const Routes = (props) => {
   return (
     <Switch>
       <Route exact path='/' component={Home} />
       <Route path='/counter' component={Counter} />
       <Route path='/fetchdata/:startDateIndex?' component={FetchData} />
+      
+      {/* 404 */}
       <Route component={PageNotFound} />
     </Switch>
   )

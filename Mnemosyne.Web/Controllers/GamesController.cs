@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Mnemosyne.Domain.Entities;
 using Mnemosyne.Infrastructure.Interfaces.Context;
@@ -7,19 +6,20 @@ using Mnemosyne.Infrastructure.Interfaces.Services;
 
 namespace Mnemosyne.Web.Controllers
 {
-    public class RolesController : ApiControllerBase
+    public class GamesController : ApiControllerBase
     {
         private readonly IApplicationContext _applicationContext;
-        private readonly IRolesQueryService _rolesQueryService;
+        private readonly IGamesQueryService _gamesQueryService;
 
-        public RolesController(IApplicationContext applicationContext, IRolesQueryService rolesQueryService)
+        public GamesController(IApplicationContext applicationContext,
+                                    IGamesQueryService gamesQueryService)
         {
             _applicationContext = applicationContext;
-            _rolesQueryService = rolesQueryService;
+            _gamesQueryService = gamesQueryService;
         }
 
         [HttpGet("all")]
-        public IEnumerable<Roles> GetAllRoles() =>
-            _applicationContext.Roles.All();
+        public IEnumerable<Games> GetAllRoles() =>
+            _applicationContext.Games.All();
     }
 }
