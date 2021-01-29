@@ -1,7 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>netcoreapp3.1</TargetFramework>
+      <TargetFramework>netstandard2.0</TargetFramework>
   </PropertyGroup>
 
   <ItemGroup>
@@ -11,6 +11,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Mnemosyne.Domain\Mnemosyne.Domain.csproj" />
+    <ProjectReference Include="..\Mnemosyne.Infrastructure.Interfaces\Mnemosyne.Infrastructure.Interfaces.csproj" />
   </ItemGroup>
 
 </Project>

@@ -1,10 +1,10 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using Mnemosyne.Infrastructure.EntityFramework.Mappings;
+using Mnemosyne.Infrastructure.EF.Mappings;
 using Mnemosyne.Infrastructure.Interfaces.Context;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace Mnemosyne.Infrastructure.EntityFramework.Context
+namespace Mnemosyne.Infrastructure.EF.Context
 {
     public abstract class DataContextBase<TContext> : DbContext, IDataContext where TContext : DbContext
     {

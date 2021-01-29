@@ -2,7 +2,7 @@
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using Mnemosyne.Domain.Entities;
 
-namespace Mnemosyne.Infrastructure.EntityFramework.Mappings.NotesContext
+namespace Mnemosyne.Infrastructure.EF.Mappings.NotesContext
 {
     public class RolesMap : IEntityMap<Roles>
     {

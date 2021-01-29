@@ -1,9 +1,8 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 using Mnemosyne.Domain.Entities;
 
-namespace Mnemosyne.Infrastructure.Interfaces.Services.Notes
+namespace Mnemosyne.Infrastructure.Interfaces.Services
 {
     public interface IRolesQueryService
     {

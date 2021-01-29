@@ -7,7 +7,7 @@ using System.Linq;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
 
-namespace Mnemosyne.Infrastructure.EntityFramework.Context
+namespace Mnemosyne.Infrastructure.EF.Context
 {
     public partial class RepositoryBase<TEntity, TId> : IRepositoryBase<TEntity, TId> where TEntity : class, IEntity<TId>
     {
