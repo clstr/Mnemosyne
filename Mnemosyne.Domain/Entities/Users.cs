@@ -12,5 +12,24 @@ namespace Mnemosyne.Domain.Entities
         public DateTime Modified { get; private set; }
 
         public virtual Roles Role { get; private set; }
+
+        public Users(string firstName, string lastName, string email, int roleId)
+        {
+            FirstName = firstName;
+            LastName = lastName;
+            Email = email;
+            RoleId = roleId;
+            Created = DateTime.Now;
+            Modified = DateTime.Now;
+        }
+
+        public void Update(string firstName, string lastName, string email, int roleId)
+        {
+            FirstName = firstName;
+            LastName = lastName;
+            Email = email;
+            RoleId = roleId;
+            Modified = DateTime.Now;
+        }
     }
 }

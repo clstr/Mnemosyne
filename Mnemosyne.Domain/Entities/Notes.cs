@@ -15,5 +15,25 @@ namespace Mnemosyne.Domain.Entities
         public virtual Games Game { get; private set; }
         public virtual Categories Category { get; private set; }
         public virtual Users User { get; private set; }
+
+        public Notes(string title, string body, int gameId, int byUser, int categoryId)
+        {
+            Title = title;
+            Body = body;
+            GameId = gameId;
+            ByUser = byUser;
+            CategoryId = categoryId;
+            Created = DateTime.Now;
+        }
+
+        public void Update(string title, string body, int gameId, int byUser, int categoryId)
+        {
+            Title = title;
+            Body = body;
+            GameId = gameId;
+            ByUser = byUser;
+            CategoryId = categoryId;
+            Modified = DateTime.Now;
+        }
     }
 }
