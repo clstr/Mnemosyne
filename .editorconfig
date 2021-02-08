@@ -5,10 +5,13 @@
 # All files
 [*]
 indent_style = space
+
 # Code files
 [*.{json}]
 indent_size = 2
-indent_style = space
+
+[*.{jsx,js,css}]
+indent_size = 2
 
 [*.{cs,csx,vb,vbx}]
 indent_size = 4
