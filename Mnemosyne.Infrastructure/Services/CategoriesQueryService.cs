@@ -16,7 +16,7 @@ namespace Mnemosyne.Infrastructure.EF.Services
             _applicationContext = applicationContext;
         }
 
-        public async Task<IEnumerable<Categories>> All()
+        public async Task<IEnumerable<Categories>> AllAsync()
         {
             return await _applicationContext.Categories
                 .AsNoTracking()

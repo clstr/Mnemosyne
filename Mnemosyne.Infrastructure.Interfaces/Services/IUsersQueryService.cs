@@ -6,6 +6,6 @@ namespace Mnemosyne.Infrastructure.Interfaces.Services
 {
     public interface IUsersQueryService
     {
-        Task<IEnumerable<Users>> All();
+        Task<IEnumerable<Users>> AllAsync();
     }
 }

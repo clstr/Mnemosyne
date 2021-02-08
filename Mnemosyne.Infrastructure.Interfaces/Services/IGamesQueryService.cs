@@ -6,6 +6,6 @@ namespace Mnemosyne.Infrastructure.Interfaces.Services
 {
     public interface IGamesQueryService
     {
-        Task<IEnumerable<Games>> All();
+        Task<IEnumerable<Games>> AllAsync();
     }
 }

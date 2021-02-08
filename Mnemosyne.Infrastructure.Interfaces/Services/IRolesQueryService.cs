@@ -6,6 +6,6 @@ namespace Mnemosyne.Infrastructure.Interfaces.Services
 {
     public interface IRolesQueryService
     {
-        Task<IEnumerable<Roles>> All();
+        Task<IEnumerable<Roles>> AllAsync();
     }
 }

@@ -16,7 +16,7 @@ namespace Mnemosyne.Infrastructure.EF.Services
             _applicationContext = applicationContext;
         }
 
-        public async Task<IEnumerable<Games>> All()
+        public async Task<IEnumerable<Games>> AllAsync()
         {
             return await _applicationContext.Games
                 .AsNoTracking()
