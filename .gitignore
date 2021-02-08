@@ -340,3 +340,5 @@ ASALocalRun/
 healthchecksdb
 /Mnemosyne.Web/appsettings.Development.json
 *.eslintcache
+/.vscode/launch.json
+/.vscode/tasks.json
